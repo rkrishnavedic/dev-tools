@@ -119,11 +119,20 @@ function FunTools(){
 
     return (
         <div style={{marginTop:"5rem"}} className="font-sans">
-            <small className="m-2 text-gray-600"> /fun-tools </small>
+            <small className="m-2 text-gray-400"> /fun-tools </small>
                 <hr/>
-           
+            <br/>
+            <hr/><hr/><hr/><hr/><hr/><hr/>
             <section className="m-4" id="profile-check">
                 <h3>CF-Profile Check</h3>
+                <small className="m-2 text-gray-600"> Instructions:
+                <br/>
+                <ol className="ml-4">
+                    <li>1. Please input handle/username that you have on codeforces</li>
+                    <li>2. Then click 'fetch profile' button to display your profile info.</li>
+                    <li>3. example: type 'benq' and see the result.</li>
+                </ol>
+                 </small>
                 <div className="mb-3 pt-0">
                     <input onChange={userNameInputHandler} type="text" placeholder="handle" className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm border shadow-md outline-none"/>
                     &ensp; <button onClick={fetchProfileHandler} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none">fetch profile</button>
@@ -134,12 +143,21 @@ function FunTools(){
             </section>
 
 
-            <hr/>
+            <hr/><hr/><hr/><hr/><hr/><hr/>
             <br/>
-            <hr/>
+            <hr/><hr/><hr/><hr/><hr/><hr/>
 
             <section className="m-4" id="profile-check">
                 <h3>CF-Contest Submission Check</h3>
+                <small className="m-2 text-gray-600"> Instructions:
+                <br/>
+                <ol className="ml-4">
+                    <li>1. Please input handle/username that you have on codeforces</li>
+                    <li>2. Then, please enter the contest ID in which you are taking part</li>
+                    <li>3. Then click 'fetch profile' button to display your profile info.</li>
+                    <li>4. example: type handle = 'tourist' and contestID = 1500! see the result.</li>
+                </ol>
+                 </small>
                 <div className="mb-3 pt-0">
                     <input id='h' onChange={contestInputHandler} type="text" placeholder="handle" className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm border shadow-md outline-none focus:outline-none"/>
                     &ensp; 
@@ -151,7 +169,7 @@ function FunTools(){
                 </div>
             </section>
             
-            <hr/>
+            <hr/><hr/><hr/><hr/><hr/>
 
         </div>
     )
