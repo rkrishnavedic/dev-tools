@@ -154,7 +154,7 @@ function FunTools(){
                 <ol className="ml-4">
                     <li>1. Please input handle/username that you have on codeforces</li>
                     <li>2. Then, please enter the contest ID in which you are taking part</li>
-                    <li>3. Then click 'fetch profile' button to display your profile info.</li>
+                    <li>3. Then click 'fetch submission' button to display your profile info.</li>
                     <li>4. example: type handle = 'tourist' and contestID = 1500! see the result.</li>
                 </ol>
                  </small>
