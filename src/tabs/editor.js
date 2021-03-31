@@ -13,10 +13,10 @@ function Editor(props){
             </div>
 
             <section style={{marginTop:"2rem"}} className="pl-7 pr-7">
-            <iframe title="sec-widget-1" src="https://compilers.widgets.sphere-engine.com/6d2090af94196903915268188962e183?place_id=sec-widget-1&amp;sdk=1" style={{width: "100%", height: "30em", border: "node"}}></iframe>
+            {/* <iframe title="sec-widget-1" src="https://compilers.widgets.sphere-engine.com/6d2090af94196903915268188962e183?place_id=sec-widget-1&amp;sdk=1" style={{width: "100%", height: "30em", border: "node"}}></iframe> */}
                 {/* <EditorPage/> */}
             {/* <iframe src="https://widgets.judge0.com?widgetId=ygkF&amp;theme=optional&amp;language=en" style={{width: "100%", height: "30em", border: "node"}}></iframe> */}
-            {/* <iframe src="https://widgets.judge0.com?widgetId=McX4&amp;theme=optional&amp;language=en" style={{width: "100%", height: "30em", border: "node"}}></iframe> */}
+            <iframe title="cpp" src="https://widgets.judge0.com?widgetId=McX4&amp;theme=optional&amp;language=en" style={{width: "100%", height: "30em", border: "node"}}></iframe>
              {/* <iframe src="https://widgets.judge0.com?widgetId=a8o5&amp;theme=optional&amp;language=en" style={{width: "100%", height: "30em", border: "node"}}></iframe> */}
             {/* <iframe src="https://widgets.judge0.com?widgetId=x3jg&amp;theme=optional&amp;language=en" style={{width: "100%", height: "30em", border: "node"}}></iframe> */}
             </section>
