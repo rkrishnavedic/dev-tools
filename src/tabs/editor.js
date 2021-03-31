@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../App.css'
 
 function Editor(props){
@@ -15,9 +15,8 @@ function languageHandler(event){
     setCodeID(idd)
 }
 
-function EditorPage(lang){
-    
-    if(lang==="C"){
+function EditorPage(){
+    if(codeID==="C"){
         //C
         return (
             <>
@@ -25,7 +24,7 @@ function EditorPage(lang){
             </>
         )
     }
-    if(lang==="JS"){
+    if(codeID==="JS"){
         //JS
         return (
             <>
@@ -33,7 +32,7 @@ function EditorPage(lang){
             </>
         )
     }
-    if(lang==="python3"){
+    if(codeID==="python3"){
         //python3
         return (
             <>
@@ -70,7 +69,7 @@ function EditorPage(lang){
             </div>
 
             <section style={{marginTop:"2rem"}} className="pl-7 pr-7">
-                <EditorPage lang={codeID}/>
+                <EditorPage/>
             {/* <iframe src="https://widgets.judge0.com?widgetId=ygkF&amp;theme=optional&amp;language=en" style={{width: "100%", height: "30em", border: "node"}}></iframe> */}
             {/* <iframe src="https://widgets.judge0.com?widgetId=McX4&amp;theme=optional&amp;language=en" style={{width: "100%", height: "30em", border: "node"}}></iframe> */}
              {/* <iframe src="https://widgets.judge0.com?widgetId=a8o5&amp;theme=optional&amp;language=en" style={{width: "100%", height: "30em", border: "node"}}></iframe> */}

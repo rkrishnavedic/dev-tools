@@ -27,7 +27,7 @@ function Page(props){
 
 function App() {
 
-  const [pageID, setPageID] = useState(0)
+  const [pageID, setPageID] = useState(2)
 
  function onTabClickHandler(event){
     //console.log(event.target.id)
