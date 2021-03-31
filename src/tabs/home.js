@@ -13,6 +13,11 @@ const tableData = [
         completiontime:"March 21"
     },
     {
+        name:"Code Editor",
+        status:1,
+        completiontime:"March 21"
+    },
+    {
         name:"CF Contest Standings Check",
         status:0,
         completiontime:"---"

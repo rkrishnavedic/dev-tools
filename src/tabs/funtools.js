@@ -71,7 +71,7 @@ function FunTools(){
 
       function ContestDataDisplay(){
         // console.log(contestData[0])
-        if( statusContestData !== "OK" ) return (<div></div>)
+        if( statusContestData !== "OK" ) return (<div></div> )
         
         return (
          <div style={{fontSize:"0.7rem"}}>

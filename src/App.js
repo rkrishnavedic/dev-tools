@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css'
+import Editor from './tabs/editor';
 import FunTools from './tabs/funtools';
 import Home from './tabs/home';
 
@@ -14,8 +15,13 @@ function Page(props){
       <Home />
     )
   }
+  if(parseInt(props.id)===1){
   return(
       <FunTools />
+  )
+  }
+  return (
+    <Editor />
   )
 }
 
@@ -41,6 +47,7 @@ function App() {
           <div className="flex flex-row gap-3">
             <div id={0} onClick={onTabClickHandler} className={( pageID === 0? activeTab:inactiveTab)}>home</div>
             <div id={1} onClick={onTabClickHandler} className={( pageID === 1? activeTab:inactiveTab)}>fun tools</div>
+            <div id={2} onClick={onTabClickHandler} className={( pageID === 2? activeTab:inactiveTab)}>editor</div>
           </div>
         </nav>
       </header>
