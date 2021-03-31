@@ -3,6 +3,7 @@ import './App.css'
 import Editor from './tabs/editor';
 import FunTools from './tabs/funtools';
 import Home from './tabs/home';
+import Learn from './tabs/learn';
 
 const iconURL = "https://cdn.worldvectorlogo.com/logos/google-webdev-logo.svg";
 const linkediconURL = "https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg";
@@ -10,18 +11,23 @@ const githubURL = "https://github.githubassets.com/images/modules/site/icons/foo
 
 function Page(props){
   //console.log(props)
-  if(parseInt(props.id) === 0) {
+  if(parseInt(props.id) === 1) {
     return (
-      <Home />
+      <FunTools />
     )
   }
-  if(parseInt(props.id)===1){
+  if(parseInt(props.id)===2){
   return(
-      <FunTools />
+      <Editor />
   )
   }
+  if(parseInt(props.id) === 3){
+    return (
+      <Learn />
+    )
+  }
   return (
-    <Editor />
+    <Home />
   )
 }
 
@@ -48,6 +54,7 @@ function App() {
             <div id={0} onClick={onTabClickHandler} className={( pageID === 0? activeTab:inactiveTab)}>home</div>
             <div id={1} onClick={onTabClickHandler} className={( pageID === 1? activeTab:inactiveTab)}>fun tools</div>
             <div id={2} onClick={onTabClickHandler} className={( pageID === 2? activeTab:inactiveTab)}>editor</div>
+            <div id={3} onClick={onTabClickHandler} className={( pageID === 3? activeTab:inactiveTab)}>learn</div>
           </div>
         </nav>
       </header>
