@@ -13,33 +13,51 @@ function FunTools(){
     const [contestList, setContestList] = useState([])
     // const [contestDelta, setContestDelta] = useState([])
     const [contestDeltaUser, setContestDeltaUser] = useState([])
+    const [laodingStatus, setLoadingStatus] = useState(false);
+
+    function Loading(){
+        if(laodingStatus){
+            return(
+            <div id="loading" class="fixed top-0 right-0 h-screen w-screen z-50 flex justify-center items-center">
+            <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+            </div>
+            )
+        }
+        return (<div></div>)
+    }
 
     function userNameInputHandler(event){
         setUsrName(event.target.value)
     }
 
     function contestListHandler(){
+        setLoadingStatus(true)
         axios.get(`https://codeforces.com/api/contest.list?`)
             .then( (res) =>{
                 //console.log(res.data)
                 setContestList(res.data.result)
+                setLoadingStatus(false)
             })
             .catch((err)=>{
                 console.log(err)
+                setLoadingStatus(false)
             })
     }
 
     function fetchProfileHandler(){
         if(usrName === '') return;
-        console.log(usrName)
+        // console.log(usrName)
+        setLoadingStatus(true)
         axios.get(`https://codeforces.com/api/user.info?handles=${usrName}`)
             .then( (res) =>{
                 console.log(res.data)
                 setData(res.data.result[0])
                 setStatusData(res.data.status)
+                setLoadingStatus(false)
             })
             .catch((err)=>{
                 console.log(err)
+                setLoadingStatus(false)
             })
     }
 
@@ -52,14 +70,17 @@ function FunTools(){
 
     function contestIDClickHandler(){
         if(contestID === 0 ) return;
+        setLoadingStatus(true)
         axios.get(`https://codeforces.com/api/contest.status?contestId=${contestID}&handle=${usrName}&from=1&count=10`)
                 .then( (res) =>{
                   // console.log(res.data.result.length)
                   setContestData(res.data.result)
                   setStatusContestData(res.data.status)
+                  setLoadingStatus(false)
                 })
                 .catch((err)=>{
                   console.log(err)
+                  setLoadingStatus(false)
                 })
       }
     function positiveDelta(deltta){
@@ -68,6 +89,7 @@ function FunTools(){
     }
     function contestUserDeltaClickHandler(){
         if(contestID === 0) return;
+        setLoadingStatus(true)
         axios.get(`https://codeforces.com/api/contest.ratingChanges?contestId=${contestID}`)
                 .then( (res) =>{
                 //   console.log(res.data)
@@ -90,9 +112,11 @@ function FunTools(){
                         break;
                     }
                 }
+                setLoadingStatus(false)
                 })
                 .catch((err)=>{
                   console.log(err)
+                  setLoadingStatus(false)
                 })
       
     }
@@ -246,6 +270,7 @@ function FunTools(){
             <small className="m-2 text-gray-400"> /fun-tools </small>
                 <hr/>
             <br/>
+            <Loading />
             <hr/><hr/><hr/><hr/><hr/><hr/>
             <section className="m-4" id="profile-check">
                 <h3>CF-Profile Check</h3>
@@ -294,6 +319,7 @@ function FunTools(){
                     <ContestDataDisplay />
                 </div>
                 <div id="result" className="mt-3">
+                        
                     <ContestUserDelta />
                 </div>
             </section>
