@@ -124,7 +124,7 @@ function FunTools(){
     function ContestUserDelta(){
         //console.log(contestDelta)
         if(contestDeltaUser.length === 0) return (<div></div>)
-        return (<div style={{fontSize:"0.7rem"}} className="text-center table-auto m-auto">
+        return (<div style={{fontSize:"0.7rem"}} className="text-center overflow-scroll border table-auto m-auto">
         <table className="m-auto">
             <thead>
                 <tr>
@@ -165,7 +165,7 @@ function FunTools(){
     function ContestList(){
         //console.log(contestList)
         if(contestList.length === 0) return (<div></div>)
-        return (<div style={{fontSize:"0.7rem"}} className="m-auto border text-center overflow-scroll h-64">
+        return (<div style={{fontSize:"0.7rem"}} className="border text-center overflow-scroll h-64">
             <table className="m-auto">
                 <thead>
                     <tr>
@@ -222,7 +222,7 @@ function FunTools(){
         if( statusContestData !== "OK" ) return (<div></div> )
         
         return (
-         <div style={{fontSize:"0.7rem"}}>
+         <div style={{fontSize:"0.7rem"}} className="border">
            <table className="m-auto text-center table-auto">
            <thead className="border px-4 py-2">
                 <tr>
