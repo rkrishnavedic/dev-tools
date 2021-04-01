@@ -11,13 +11,15 @@ function FunTools(){
     const [contestData, setContestData] = useState([])
     const [statusContestData, setStatusContestData] = useState("N");
     const [contestList, setContestList] = useState([])
+    // const [contestDelta, setContestDelta] = useState([])
+    const [contestDeltaUser, setContestDeltaUser] = useState([])
 
     function userNameInputHandler(event){
         setUsrName(event.target.value)
     }
 
     function contestListHandler(){
-        axios.get(`https://codeforces.com/api/contest.list`)
+        axios.get(`https://codeforces.com/api/contest.list?`)
             .then( (res) =>{
                 //console.log(res.data)
                 setContestList(res.data.result)
@@ -49,7 +51,7 @@ function FunTools(){
     }
 
     function contestIDClickHandler(){
-        if(contestID === 0 ) return
+        if(contestID === 0 ) return;
         axios.get(`https://codeforces.com/api/contest.status?contestId=${contestID}&handle=${usrName}&from=1&count=10`)
                 .then( (res) =>{
                   // console.log(res.data.result.length)
@@ -60,6 +62,77 @@ function FunTools(){
                   console.log(err)
                 })
       }
+    function positiveDelta(deltta){
+        if(deltta>0) return "+";
+        return ""
+    }
+    function contestUserDeltaClickHandler(){
+        if(contestID === 0) return;
+        axios.get(`https://codeforces.com/api/contest.ratingChanges?contestId=${contestID}`)
+                .then( (res) =>{
+                //   console.log(res.data)
+                //   setContestDelta(res.data.result)
+                  for(let i=0;i<res.data.result.length;i++){
+            
+                    if((res.data.result[i].handle).toLowerCase() === usrName.toLowerCase()){
+                        let gh = [
+                            {
+                                cid: res.data.result[i].contestId,
+                                cname: res.data.result[i].contestName,
+                                rank: res.data.result[i].rank,
+                                handle: res.data.result[i].handle,
+                                oldRating: res.data.result[i].oldRating,
+                                newRating: res.data.result[i].newRating
+                            }
+                        ]
+                        setContestDeltaUser(gh)
+                        // setContestDelta([]);
+                        break;
+                    }
+                }
+                })
+                .catch((err)=>{
+                  console.log(err)
+                })
+      
+    }
+
+    function ContestUserDelta(){
+        //console.log(contestDelta)
+        if(contestDeltaUser.length === 0) return (<div></div>)
+        return (<div style={{fontSize:"0.7rem"}} className="text-center table-auto m-auto">
+        <table className="m-auto">
+            <thead>
+                <tr>
+                <td className="border px-2 py-1">Contest ID</td>
+                <td className="border px-2 py-1">ContestName</td>
+                <td className="border px-2 py-1">Rank</td>
+                <td className="border px-2 py-1">handle</td>
+                <td className="border px-2 py-1">oldRating</td>
+                <td className="border px-2 py-1">newRating</td>
+                <td className="border px-2 py-1 "> &Delta;</td>
+                </tr>
+            </thead>
+            <tbody>
+            {contestDeltaUser.map((value,index)=>{
+            return (
+                <tr className={(index%2===1? "bg-gray-100":null)}>
+                 <td className="border px-2 py-1">{value.cid}</td>
+                <td className="border px-2 py-1">{value.cname}</td>
+                <td className="border px-2 py-1">{value.rank}</td>
+                <td className="border px-2 py-1">{value.handle}</td>
+                <td className="border px-2 py-1 font-medium">{value.oldRating}</td>
+                <td className="border px-2 py-1 font-medium">{value.newRating}</td>
+                <td style={{fontSize:"1rem"}} className={(value.newRating-value.oldRating>=0? "border px-2 py-1 text-green-500 font-bold":"border px-4 py-2 text-red-600 font-bold")}>{positiveDelta(value.newRating-value.oldRating)}{(value.newRating-value.oldRating)}</td>
+                </tr>
+                        )
+            })}
+
+            </tbody>
+        
+        </table>
+    </div>)
+    }
 
     function toHH(t){
         return ((t)/3600).toFixed(2) +'hrs'
@@ -68,28 +141,28 @@ function FunTools(){
     function ContestList(){
         //console.log(contestList)
         if(contestList.length === 0) return (<div></div>)
-        return (<div style={{fontSize:"0.7rem"}} className="m-auto border overflow-scroll h-64">
+        return (<div style={{fontSize:"0.7rem"}} className="m-auto border text-center overflow-scroll h-64">
             <table>
                 <thead>
                     <tr>
-                    <td className="border px-4 py-2">Contest ID</td>
-                    <td className="border px-4 py-2">Name</td>
-                    <td className="border px-4 py-2">Status</td>
-                    <td className="border px-4 py-2">Duration</td>
-                    <td className="border px-4 py-2">Type</td>
+                    <td className="border px-2 py-1">Contest ID</td>
+                    <td className="border px-2 py-1">Name</td>
+                    <td className="border px-2 py-1">Status</td>
+                    <td className="border px-2 py-1">Duration</td>
+                    <td className="border px-2 py-1">Type</td>
                     
                     </tr>
                 </thead>
                 <tbody>
                 {contestList.map((value,index)=>{
                 return (
-                    <tr className={(index%2==1? "bg-gray-100":null)}>
-                     <td className="border px-4 py-2">{value.id}</td>
-                    <td className="border px-4 py-2">{value.name}</td>
-                    <td className="border px-4 py-2">{value.phase}</td>
+                    <tr className={(index%2===1? "bg-gray-100":null)}>
+                     <td className="border px-2 py-1">{value.id}</td>
+                    <td className="border px-2 py-1">{value.name}</td>
+                    <td className="border px-2 py-1">{value.phase}</td>
                     
-                    <td className="border px-4 py-2">{toHH(value.durationSeconds)}</td>
-                    <td className="border px-4 py-2">{value.type}</td>
+                    <td className="border px-2 py-1">{toHH(value.durationSeconds)}</td>
+                    <td className="border px-2 py-1">{value.type}</td>
                     </tr>
                             )
                 })}
@@ -199,14 +272,15 @@ function FunTools(){
             <hr/><hr/><hr/><hr/><hr/><hr/>
 
             <section className="m-4" id="profile-check">
-                <h3>CF-Contest Submission Check</h3>
+                <h3>CF-Contest Submission/Rating Changes</h3>
                 <small className="m-2 text-gray-600"> Instructions:
                 <br/>
                 <ol className="ml-4">
                     <li>1. Please input handle/username that you have on codeforces</li>
                     <li>2. Then, please enter the contest ID in which you are taking part</li>
-                    <li>3. Then click 'fetch submission' button to display your profile info.</li>
-                    <li>4. example: type handle = 'tourist' and contestID = 1500! see the result.</li>
+                    <li>3. (Optional) click 'fetch submission' button to display your profile info.</li>
+                    <li>4. (Optional) click 'rating Change?' button to display your rating change info.</li>
+                    <li>5. example: type handle = 'tourist' and contestID = 1500! see the result.</li>
                 </ol>
                  </small>
                 <div className="mb-3 pt-0">
@@ -214,12 +288,20 @@ function FunTools(){
                     &ensp; 
                     <input id='c' onChange={contestInputHandler} type="decimal" placeholder="contestID" className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm border shadow-md outline-none focus:outline-none"/>
                     &ensp; <button onClick={contestIDClickHandler} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full ease-in-out duration-300 focus:outline-none">fetch submissions</button>
+                    &ensp; <button onClick={contestUserDeltaClickHandler} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full ease-in-out duration-300 focus:outline-none">rating Change?</button>
                 </div>
                 <div id="result">
                     <ContestDataDisplay />
                 </div>
+                <div id="result" className="mt-3">
+                    <ContestUserDelta />
+                </div>
             </section>
             
+            <hr/><hr/><hr/><hr/><hr/>
+
+            <br/>
+
             <hr/><hr/><hr/><hr/><hr/>
 
             <section className="m-4" id="profile-check">

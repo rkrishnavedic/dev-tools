@@ -20,6 +20,11 @@ export const tableData = [
         completiontime:"April 21"
     },
     {
+        name:"CF Contest Rating Change",
+        status:1,
+        completiontime:"April 21"
+    },
+    {
         name:"CF Contest Standings Check",
         status:0,
         completiontime:"---"
