@@ -10,9 +10,21 @@ function FunTools(){
     const [contestID, setContestID] = useState(0);
     const [contestData, setContestData] = useState([])
     const [statusContestData, setStatusContestData] = useState("N");
+    const [contestList, setContestList] = useState([])
 
     function userNameInputHandler(event){
         setUsrName(event.target.value)
+    }
+
+    function contestListHandler(){
+        axios.get(`https://codeforces.com/api/contest.list`)
+            .then( (res) =>{
+                //console.log(res.data)
+                setContestList(res.data.result)
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
     }
 
     function fetchProfileHandler(){
@@ -48,6 +60,45 @@ function FunTools(){
                   console.log(err)
                 })
       }
+
+    function toHH(t){
+        return ((t)/3600).toFixed(2) +'hrs'
+    }
+
+    function ContestList(){
+        //console.log(contestList)
+        if(contestList.length === 0) return (<div></div>)
+        return (<div style={{fontSize:"0.7rem"}} className="m-auto border overflow-scroll h-64">
+            <table>
+                <thead>
+                    <tr>
+                    <td className="border px-4 py-2">Contest ID</td>
+                    <td className="border px-4 py-2">Name</td>
+                    <td className="border px-4 py-2">Status</td>
+                    <td className="border px-4 py-2">Duration</td>
+                    <td className="border px-4 py-2">Type</td>
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                {contestList.map((value,index)=>{
+                return (
+                    <tr className={(index%2==1? "bg-gray-100":null)}>
+                     <td className="border px-4 py-2">{value.id}</td>
+                    <td className="border px-4 py-2">{value.name}</td>
+                    <td className="border px-4 py-2">{value.phase}</td>
+                    
+                    <td className="border px-4 py-2">{toHH(value.durationSeconds)}</td>
+                    <td className="border px-4 py-2">{value.type}</td>
+                    </tr>
+                            )
+                })}
+
+                </tbody>
+            
+            </table>
+        </div>)
+    }
 
     function UserData(){
         if( statusData !== "OK" ) return (<div></div>)
@@ -170,6 +221,23 @@ function FunTools(){
             </section>
             
             <hr/><hr/><hr/><hr/><hr/>
+
+            <section className="m-4" id="profile-check">
+                <h3>CF-Contest List</h3>
+                <small className="m-2 text-gray-600"> Instructions:
+                <br/>
+                <ol className="ml-4">
+                    <li>1. Just Click "list Contest" to fetch the list of contests.</li>
+                    <li>2. You can scroll throught the list.</li>
+                </ol>
+                 </small>
+                <div className="mb-3 pt-0">
+                    <button onClick={contestListHandler} className="ease-in-out duration-300 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none">list contest</button>
+                </div>
+                <div id="result">
+                    <ContestList />
+                </div>
+            </section>
 
         </div>
     )
