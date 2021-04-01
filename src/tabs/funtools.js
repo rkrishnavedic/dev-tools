@@ -201,7 +201,7 @@ function FunTools(){
         if( statusData !== "OK" ) return (<div></div>)
         
         return (
-          <div style={{paddingTop:"10px",paddingLeft:"10px"}}>
+          <div className="m-5 p-3 bg-indigo-100 border">
             Name: {data.firstName} {data.lastName} 
             <br/>
             Rating: {data.rating} (maxRating : {data.maxRating})
@@ -286,7 +286,7 @@ function FunTools(){
                     <input onChange={userNameInputHandler} type="text" placeholder="handle" className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm border shadow-md outline-none"/>
                     &ensp; <button onClick={fetchProfileHandler} className="ease-in-out duration-300 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none">fetch profile</button>
                 </div>
-                <div id="result">
+                <div id="result" className="font-medium text-gray-800 font-sans">
                     <UserData />
                 </div>
             </section>
