@@ -63,7 +63,7 @@ function App() {
        <hr/>
       <Page id={pageID} />
       </section>
-      <footer className="text-center ustify-between p-5 bg-gray-700 text-gray-300" style={{marginTop:"5rem"}}>
+      <footer className="text-center w-screen ustify-between p-5 bg-gray-700 text-gray-300" style={{marginTop:"5rem"}}>
         <div>
           social media
         <br/>

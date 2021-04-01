@@ -135,7 +135,7 @@ function FunTools(){
                  </small>
                 <div className="mb-3 pt-0">
                     <input onChange={userNameInputHandler} type="text" placeholder="handle" className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm border shadow-md outline-none"/>
-                    &ensp; <button onClick={fetchProfileHandler} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none">fetch profile</button>
+                    &ensp; <button onClick={fetchProfileHandler} className="ease-in-out duration-300 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none">fetch profile</button>
                 </div>
                 <div id="result">
                     <UserData />
@@ -162,7 +162,7 @@ function FunTools(){
                     <input id='h' onChange={contestInputHandler} type="text" placeholder="handle" className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm border shadow-md outline-none focus:outline-none"/>
                     &ensp; 
                     <input id='c' onChange={contestInputHandler} type="decimal" placeholder="contestID" className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm border shadow-md outline-none focus:outline-none"/>
-                    &ensp; <button onClick={contestIDClickHandler} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none">fetch submissions</button>
+                    &ensp; <button onClick={contestIDClickHandler} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full ease-in-out duration-300 focus:outline-none">fetch submissions</button>
                 </div>
                 <div id="result">
                     <ContestDataDisplay />
