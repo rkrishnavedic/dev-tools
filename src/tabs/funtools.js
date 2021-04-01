@@ -166,7 +166,7 @@ function FunTools(){
         //console.log(contestList)
         if(contestList.length === 0) return (<div></div>)
         return (<div style={{fontSize:"0.7rem"}} className="m-auto border text-center overflow-scroll h-64">
-            <table>
+            <table className="m-auto">
                 <thead>
                     <tr>
                     <td className="border px-2 py-1">Contest ID</td>
