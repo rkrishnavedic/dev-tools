@@ -469,10 +469,10 @@ function FunTools(){
                 </ol>
                  </small>
                 <div className="mb-3 pt-0">
-                <input id='c' onChange={contestStandingsHandler} type="decimal" placeholder="contestID" className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm border shadow-md outline-none focus:outline-none"/>
+                <input id='c' onChange={contestStandingsHandler} type="decimal" placeholder="contestID" className="px-3 py-3 rounded-lg placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm border shadow-md outline-none focus:outline-none"/>
                     &ensp; 
-                    <input id='pg' onChange={contestStandingsHandler} type="decimal" placeholder="#page" className="text-center rounded-full m-auto px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm border shadow-md outline-none focus:outline-none"/>
-                    &ensp; <button id='btn' onClick={contestStandingsHandler} className="ease-in-out duration-300 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none">contest Standings</button>
+                    <input id='pg' onChange={contestStandingsHandler} type="decimal" placeholder="#page" className="text-center rounded-lg m-auto px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm border shadow-md outline-none focus:outline-none"/>
+                    &ensp; <button id='btn' onClick={contestStandingsHandler} className="ease-in-out duration-300 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none">contest Standings</button>
                 </div>
                 <div id="result center">
                     <ContestStandings />
