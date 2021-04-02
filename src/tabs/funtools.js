@@ -14,6 +14,9 @@ function FunTools(){
     // const [contestDelta, setContestDelta] = useState([])
     const [contestDeltaUser, setContestDeltaUser] = useState([])
     const [laodingStatus, setLoadingStatus] = useState(false);
+    const [contestStandingData, setcontestStandingData] = useState([])
+    const [contestProblems, setContestProblems] = useState([])
+    const [pageContestStanding, setpageContestStanding] = useState(1)
 
     function Loading(){
         if(laodingStatus){
@@ -26,8 +29,50 @@ function FunTools(){
         return (<div></div>)
     }
 
+
     function userNameInputHandler(event){
         setUsrName(event.target.value)
+    }
+
+    function contestStandingsHandler(event){
+
+        if(event.target.id === 'pg'){
+            if(event.target.value !== ""){
+                setpageContestStanding(parseInt(event.target.value));
+            }else{
+                setpageContestStanding(1)
+            }
+            return ;
+        }
+
+        if(event.target.id === 'c'){
+           
+                if(event.target.value !== 0){
+                setContestID(event.target.value)
+                }
+            return;
+        }
+
+        setLoadingStatus(true)
+        axios.get(`https://codeforces.com/api/contest.standings?contestId=${contestID}&from=${1+(pageContestStanding-1)*20}&count=20`)
+            .then( (res) =>{
+                //console.log(res.data)
+                //setContestList(res.data.result.slice(0,10))
+
+                // if(usrName !== ""){
+                //     for(let i=0;i<res.data.result.rows.length;i++){
+                //         if(usrName.toLowerCase() === res.data.result.rows.party.members[0].toLowerCase())
+                //     }
+                // }
+                setContestProblems(res.data.result.problems)
+                setcontestStandingData(res.data.result.rows)
+
+                setLoadingStatus(false)
+            })
+            .catch((err)=>{
+                console.log(err)
+                setLoadingStatus(false)
+            })
     }
 
     function contestListHandler(){
@@ -87,6 +132,17 @@ function FunTools(){
         if(deltta>0) return "+";
         return ""
     }
+
+    function make2(tt){
+        if(tt<10) return '0'+tt;
+        return tt;
+    }
+    function toHHMM(t){
+        if(t === undefined) return t;
+        return make2((t-t%3600)/3600)+':'+make2((t%3600-t%60)/60)
+    
+    }
+
     function contestUserDeltaClickHandler(){
         if(contestID === 0) return;
         setLoadingStatus(true)
@@ -119,6 +175,52 @@ function FunTools(){
                   setLoadingStatus(false)
                 })
       
+    }
+
+    function ContestStandings(){
+        if(contestStandingData.length === 0) return (<div></div>)
+        return (<div style={{fontSize:"0.7rem"}} className="text-center overflow-scroll border table-auto m-auto">
+        <table className="m-auto">
+            <thead>
+                <tr>
+                <td className="border px-2 py-1">Rank</td>
+                <td className="border px-2 py-1">handle</td>
+                {contestProblems.map((value)=>{
+                    return(
+                        <td className="border px-2 py-1">{value.index}</td>
+                    )
+                })}
+                <td className="border px-2 py-1">----*----</td>
+                <td className="border px-2 py-1">points</td>
+                </tr>
+            </thead>
+            <tbody>
+            {contestStandingData.map((value,index)=>{
+            return (
+                <tr className={(index%2===1? "bg-gray-100":null)}>
+                 <td className="border px-2 py-1">{value.rank}</td>
+                <td className="border text-gray-700 font-medium px-2 py-1">{value.party.members[0].handle}</td>
+                {value.problemResults.map((pr)=>{
+                    return(
+                        <td className="border font-bold text-green-700 px-2 py-1">{pr.points}
+                        <br/>
+                        <span className="text-gray-400 font-medium font-xs">
+                            {toHHMM(pr.bestSubmissionTimeSeconds)}
+                        </span>
+                        </td>
+                    )
+                })}
+                <td className="border px-2 py-1"></td>
+                <td className="border px-2 font-bold py-1">{value.points}</td>
+              </tr>
+                        )
+            })}
+
+            </tbody>
+        
+        </table>
+        </div>
+        )
     }
 
     function ContestUserDelta(){
@@ -296,7 +398,7 @@ function FunTools(){
             <br/>
             <hr/><hr/><hr/><hr/><hr/><hr/>
 
-            <section className="m-4" id="profile-check">
+            <section className="m-4" id="profile-sub/rate">
                 <h3>CF-Contest Submission/Rating Changes</h3>
                 <small className="m-2 text-gray-600"> Instructions:
                 <br/>
@@ -330,7 +432,7 @@ function FunTools(){
 
             <hr/><hr/><hr/><hr/><hr/>
 
-            <section className="m-4" id="profile-check">
+            <section className="m-4" id="contest-list">
                 <h3>CF-Contest List</h3>
                 <small className="m-2 text-gray-600"> Instructions:
                 <br/>
@@ -346,6 +448,34 @@ function FunTools(){
                 </div>
                 <div id="result">
                     <ContestList />
+                </div>
+            </section>
+
+            <hr/><hr/><hr/><hr/><hr/>
+
+            <br/>
+
+            <hr/><hr/><hr/><hr/><hr/>
+
+            <section className="m-4" id="contest-standings">
+                <h3>CF-Contest Standings</h3>
+                <small className="m-2 text-gray-600"> Instructions:
+                <br/>
+                <ol className="ml-4">
+                    <li>1. Just Click "contest Standings" to fetch the list of contests.</li>
+                    <li>2. You can go to next page.</li>
+                    <li>3. 20 entries Listed per page.</li>
+                    <li>4. By default page number = 1</li>
+                </ol>
+                 </small>
+                <div className="mb-3 pt-0">
+                <input id='c' onChange={contestStandingsHandler} type="decimal" placeholder="contestID" className="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm border shadow-md outline-none focus:outline-none"/>
+                    &ensp; 
+                    <button id='btn' onClick={contestStandingsHandler} className="ease-in-out duration-300 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none">contest Standings</button>
+                </div>
+                <div id="result center">
+                <input id='pg' onChange={contestStandingsHandler} type="decimal" placeholder="#page" className="text-center rounded-full m-auto px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm border shadow-md outline-none focus:outline-none"/>
+                    <ContestStandings />
                 </div>
             </section>
 
