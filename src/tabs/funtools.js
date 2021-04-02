@@ -35,7 +35,7 @@ function FunTools(){
         axios.get(`https://codeforces.com/api/contest.list?`)
             .then( (res) =>{
                 //console.log(res.data)
-                setContestList(res.data.result)
+                setContestList(res.data.result.slice(0,10))
                 setLoadingStatus(false)
             })
             .catch((err)=>{
@@ -165,7 +165,7 @@ function FunTools(){
     function ContestList(){
         //console.log(contestList)
         if(contestList.length === 0) return (<div></div>)
-        return (<div style={{fontSize:"0.7rem"}} className="border text-center overflow-scroll h-64">
+        return (<div style={{fontSize:"0.7rem"}} className="border text-center">
             <table className="m-auto">
                 <thead>
                     <tr>
@@ -337,9 +337,11 @@ function FunTools(){
                 <ol className="ml-4">
                     <li>1. Just Click "list Contest" to fetch the list of contests.</li>
                     <li>2. You can scroll throught the list.</li>
+                    <li>2. Latest 10 Contest Listed.</li>
                 </ol>
                  </small>
                 <div className="mb-3 pt-0">
+        
                     <button onClick={contestListHandler} className="ease-in-out duration-300 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none">list contest</button>
                 </div>
                 <div id="result">
