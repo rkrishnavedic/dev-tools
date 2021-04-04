@@ -1,5 +1,6 @@
 import React from 'react';
 import '../App.css'
+import Blogs from './blogs';
 
 function Learn(){
     return (
@@ -14,6 +15,11 @@ function Learn(){
                     We are working on this page...
                 </small>
             </div>
+
+            <blogs>
+                Here will be blogs
+                <Blogs/>
+            </blogs>
         </div>
     )
 }
