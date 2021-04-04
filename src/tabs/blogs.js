@@ -8,15 +8,14 @@ function Blogs(){
 
     const [blogsData, setblogsData] = useState([]);
 
-    const fetchData = async ()=>{
-    await axios.get(blogsAPIURL)
-            .then((res)=>{
-                //console.log(res.data);
-                setblogsData(res.data);
-            }).catch(err=>console.log(err));
-        }
-
     useEffect(()=>{
+        const fetchData = async ()=>{
+            await axios.get(blogsAPIURL)
+                    .then((res)=>{
+                        //console.log(res.data);
+                        setblogsData(res.data);
+                    }).catch(err=>console.log(err));
+                }
         fetchData();
     },blogsData)
 
