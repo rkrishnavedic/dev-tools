@@ -173,15 +173,16 @@ function Blogs(){
             ID:<input style={{outline:"0.1rem solid black", margin:"0.3rem", padding:"0.3rem",width:"5rem"}} id="idd" onChange={iddHandler} placeholder="ID Unique"></input>
             Title:<input style={{outline:"0.1rem solid black", margin:"0.3rem", padding:"0.3rem",width:"5rem"}} id="title" onChange={titleNameHandler} placeholder="title"></input>
             Author:<input style={{outline:"0.1rem solid black",margin:"0.3rem",  padding:"0.3rem",width:"5rem"}} id="author" onChange={authorNameHandler} placeholder="author"></input>
-            <br/>Body:<textarea style={{outline:"0.1rem solid black", margin:"0.3rem", padding:"0.3rem",width:"5rem"}} id="body" onChange={bodyHandler} placeholder="body"></textarea>
+            <br/>Body:<textarea style={{outline:"0.1rem solid black", margin:"0.3rem", padding:"0.3rem"}} id="body" onChange={bodyHandler} placeholder="body"></textarea>
            
             <br/>tags:<input style={{outline:"0.1rem solid black", margin:"0.3rem", padding:"0.3rem",width:"5rem"}} id="tags" onChange={tagsHandler} placeholder="tags"></input>
-            </div>
             <button className="rounded-full p-2 bg-indigo-300 hover:bg-indigo-600" onClick={createButtonHandler} id="create" >create-blog</button>
+            </div>
+            
             <hr/><hr/><hr/><hr/><hr/>
             <div style={{padding:"1rem"}}>
             ValidToken to Delete<input style={{outline:"0.1rem solid black",margin:"0.3rem", padding:"0.3rem",width:"5rem"}} id="token" placeholder="token" onChange={tokenHandler}></input>
-            <br/>
+            
             ID:<input style={{outline:"0.1rem solid black", margin:"0.3rem", padding:"0.3rem",width:"5rem"}} id="idd" onChange={iddHandler} placeholder="ID Unique"></input>
             <button className="rounded-full p-2 bg-red-300 hover:bg-red-600" onClick={deleteButtonHandler} id="delete" >delete-blog</button>
           
