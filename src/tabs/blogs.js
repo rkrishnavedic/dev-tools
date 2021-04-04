@@ -8,13 +8,17 @@ function Blogs(){
 
     const [blogsData, setblogsData] = useState([]);
 
-    useEffect(async ()=>{
+    const fetchData = async ()=>{
     await axios.get(blogsAPIURL)
             .then((res)=>{
                 //console.log(res.data);
                 setblogsData(res.data);
             }).catch(err=>console.log(err));
-        },[blogsData]);
+        }
+
+    useEffect(()=>{
+        fetchData();
+    },blogsData)
 
     return (
         <div className="w-2 m-2 font-sans">
