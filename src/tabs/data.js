@@ -46,18 +46,18 @@ export const appreciationsData =[
         quote:"randomuser.me Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam obcaecati laudantium recusandae, debitis eum voluptatem ad, illo voluptatibus temporibus odio provident.",
         name:"Indigo Nama",
         handle:"@indigo",
-        avatarURL:"https://randomuser.me/api/portraits/women/11.jpg"
+        avatarURL:"https://randomuser.me/api/portraits/lego/5.jpg"
     },
     {
         quote:"randomuser.me Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam obcaecati laudantium recusandae, debitis eum voluptatem ad, illo voluptatibus temporibus odio provident.",
         name:"Indigo Nama",
         handle:"@indigo",
-        avatarURL:"https://randomuser.me/api/portraits/women/11.jpg"
+        avatarURL:"https://randomuser.me/api/portraits/lego/5.jpg"
     },
     {
         quote:" randomuser.me Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam obcaecati laudantium recusandae, debitis eum voluptatem ad, illo voluptatibus temporibus odio provident.",
         name:"Indigo Nama",
         handle:"@indigo",
-        avatarURL:"https://randomuser.me/api/portraits/women/11.jpg"
+        avatarURL:"https://randomuser.me/api/portraits/lego/5.jpg"
     },
 ]
